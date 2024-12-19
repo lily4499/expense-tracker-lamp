@@ -1,0 +1,34 @@
+services:
+  app:
+    build:
+      context: .
+    container_name: expense-tracker-app
+    ports:
+      - "8080:80" # Host port 8080 maps to container port 80
+    environment:
+      DB_HOST: ${DB_HOST}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+    depends_on:
+      - db
+    volumes:
+      - ./assets:/var/www/html/assets
+      - ./logs:/var/www/html/logs
+
+  db:
+    image: mysql:8.0
+    container_name: expense-tracker-db
+    ports:
+      - "3307:3306" # Host port 3306 maps to container port 3306
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - db-data:/var/lib/mysql
+      - ./sql/expense_tracker.sql:/docker-entrypoint-initdb.d/expense_tracker.sql
+
+volumes:
+  db-data:

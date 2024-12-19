@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: expense-tracker-db
+  namespace: lamp-namespace
+spec:
+  selector:
+    app: expense-tracker-db
+  ports:
+    - protocol: TCP
+      port: 3307
+      targetPort: 3306
+  clusterIP: None # Enables headless service for stable network identity
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: expense-tracker-app-service
+  namespace: lamp-namespace
+spec:
+  selector:
+    app: expense-tracker-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: NodePort

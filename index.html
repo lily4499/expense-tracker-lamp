@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="assets/css/styles.css"> <!-- Link the CSS file -->
+</head>
+<body>
+    <div class="form-container">
+        <h1>Expense Tracker</h1> <!-- Title above the form -->
+        <form action="add_transaction.php" method="POST">
+            <label>Date:</label>
+            <input type="date" name="date" required>
+            
+            <label>Type:</label>
+            <select name="type" required>
+                <option value="income">Income</option>
+                <option value="expense">Expense</option>
+            </select>
+            
+            <label>Category:</label>
+            <input type="text" name="category" required>
+            
+            <label>Amount:</label>
+            <input type="number" step="0.01" name="amount" required>
+            
+            <label>Description:</label>
+            <textarea name="description"></textarea>
+            
+            <button type="submit">Add Transaction</button>
+        </form>
+    </div>
+</body>
+</html>
+
